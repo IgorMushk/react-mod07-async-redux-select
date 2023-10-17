@@ -1,4 +1,4 @@
-import { statusFilters } from "./constants";
+import { statusFilters } from './constants';
 
 export const selectTasks = state => state.tasks.items;
 
@@ -12,9 +12,9 @@ export const selectVisibleTasks = state => {
   // Используем другие селекторы
   const tasks = selectTasks(state);
   const statusFilter = selectStatusFilter(state);
-//   console.log('select-selectVisibleTasks-state >>>', state);
-//   console.log('select-selectVisibleTasks-tasks >>>', tasks);
-//   console.log('select-selectVisibleTasks-statusFilter >>>', statusFilters);
+  //   console.log('select-selectVisibleTasks-state >>>', state);
+  //   console.log('select-selectVisibleTasks-tasks >>>', tasks);
+  //   console.log('select-selectVisibleTasks-statusFilter >>>', statusFilters);
 
   switch (statusFilter) {
     case statusFilters.active:
@@ -24,5 +24,21 @@ export const selectVisibleTasks = state => {
     default:
       return tasks;
   }
+};
+
+export const selectTaskCount = state => {
+  const tasks = selectTasks(state);
+  
+  return tasks.reduce(
+    (count, task) => {
+      if (task.completed) {
+        count.completed += 1;
+      } else {
+        count.active += 1;
+      }
+      return count;
+    },
+    { active: 0, completed: 0 }
+  );
 
 };
