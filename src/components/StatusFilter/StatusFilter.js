@@ -4,7 +4,7 @@ import css from './StatusFilter.module.css';
 import { statusFilters } from 'redux/constants';
 // Импортируем хук
 import { useDispatch, useSelector } from 'react-redux';
-import { getStatusFilter } from 'redux/selectors';
+import { selectStatusFilter } from 'redux/selectors';
 // Импортируем генератор экшена
 //=============== Before ========================
 //import { setStatusFilter } from 'redux/actions';
@@ -17,7 +17,7 @@ export const StatusFilter = () => {
 
   // Получаем значение фильтра из состояния Redux
   //const filter = useSelector(state => state.filters.status);
-  const filter = useSelector(getStatusFilter);
+  const filter = useSelector(selectStatusFilter);
 
   // Вызываем генератор экшена и передаём значение фильтра
   // Отправляем результат - экшен изменения фильтра
